@@ -1,0 +1,2 @@
+# Freenove_Bipedal_Robot_Kit_for_Raspberry_Pi_Pico
+Apply to FNK0033

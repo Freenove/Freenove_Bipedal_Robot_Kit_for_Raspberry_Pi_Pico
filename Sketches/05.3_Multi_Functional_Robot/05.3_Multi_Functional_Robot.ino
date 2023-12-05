@@ -141,7 +141,7 @@ void receiveEmotion() {
   if (arg != NULL) {
     String stringOne = String(arg);  // converting a constant char into a String
     emotion_task_mode = stringOne.toInt();
-    Emotion_SetMode(emotion_task_mode);  //显示静态表情
+    Emotion_SetMode(emotion_task_mode);  
   } else {
   }
   sendFinalAck();
@@ -267,7 +267,6 @@ void Ultrasonic_Avoid() {
 
 int avoidanceflag =0;
 
-//避障动作
 void avoidance(){
     if (ultrasonicavoidMode == 1) {
       Serial.println("ultrasonicavoidMode... ");
@@ -302,11 +301,9 @@ void avoidance(){
       if (Ultrasonic_Avoid_steps > 6) {
         Ultrasonic_Avoid_steps = 0;
         avoidanceflag =0;
-        // break;
       }
       if (ultrasonicavoidMode != 1){
         Ultrasonic_Avoid_steps = 0;
-        // break;
       }
     }
 }

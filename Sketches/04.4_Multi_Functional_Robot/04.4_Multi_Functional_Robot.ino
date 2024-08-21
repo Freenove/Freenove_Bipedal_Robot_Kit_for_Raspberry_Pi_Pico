@@ -63,8 +63,8 @@ void calib_homePos() {
 void setup() {
   Serial.begin(115200);  //Turn on the serial port monitor and set the baud rate to 115200
   delay(1500);
-  WS2812_Setup();        //WS2812 initialization
-  Buzzer_Setup();        //Initialize the buzzer
+  WS2812_Setup();  //WS2812 initialization
+  Buzzer_Setup();  //Initialize the buzzer
   Ultrasonic_Setup();
   EEPROM.begin(512);
   Bipedal_Robot.init(LeftLeg, RightLeg, LeftFoot, RightFoot, true);  //Set the servo pins and Buzzer pin
@@ -94,7 +94,6 @@ void loop() {
     Serial.println();
     IrReceiver.resume();  // Enable receiving of the next value
     Serial.println("YL: " + String(YL) + " YR: " + String(YR) + " RL: " + String(RL) + " RR: " + String(RR));
-  
   }
   Emotion_Detection();
   Emotion_Show(emotion_task_mode);  //Led matrix display function
@@ -189,16 +188,20 @@ void Move(int data) {
   // Handle the commands
   switch (data) {
     case 1:  // Receive the number '+'
-      Bipedal_Robot.walk(2, 2000, 1);
+      Bipedal_Robot.walk(2, 1500, 1);
+      move_flag = 0;
       break;
     case 2:  // Receive the number '-'
-      Bipedal_Robot.walk(2, 2000, -1);
+      Bipedal_Robot.walk(2, 1500, -1);
+      move_flag = 0;
       break;
     case 3:  // Receive the number '|<<'
-      Bipedal_Robot.turn(2, 2000, 1);
+      Bipedal_Robot.turn(2, 1500, 1);
+      move_flag = 0;
       break;
     case 4:  // Receive the number '>>|'
-      Bipedal_Robot.turn(2, 2000, -1);
+      Bipedal_Robot.turn(2, 1500, -1);
+      move_flag = 0;
       break;
     case 5:  // Receive the number '>>|'
       Ultrasonic_Avoid();
@@ -218,19 +221,19 @@ void Move(int data) {
 }
 
 void dance() {
-  Bipedal_Robot.jitter(10, 1000, 40);
+  Bipedal_Robot.jitter(1, 1000, 40);
   Bipedal_Robot.home();
-  Bipedal_Robot.moonwalker(2, 1200, 30, 1);
+  Bipedal_Robot.moonwalker(1, 1200, 30, 1);
   Bipedal_Robot.home();
-  Bipedal_Robot.ascendingTurn(2, 1000, 50);
+  Bipedal_Robot.ascendingTurn(1, 1000, 50);
   Bipedal_Robot.home();
-  Bipedal_Robot.tiptoeSwing(2, 1000, 30);
+  Bipedal_Robot.tiptoeSwing(1, 1000, 30);
   Bipedal_Robot.home();
-  Bipedal_Robot.flapping(2, 1000, 40, 1);
+  Bipedal_Robot.flapping(1, 1000, 40, 1);
   Bipedal_Robot.home();
-  Bipedal_Robot.crusaito(2, 3000, 40, 1);
+  Bipedal_Robot.crusaito(1, 3000, 40, 1);
   Bipedal_Robot.home();
-  Bipedal_Robot.shakeLeg(2, 1000, 1);
+  Bipedal_Robot.shakeLeg(1, 1000, 1);
   Bipedal_Robot.home();
 }
 

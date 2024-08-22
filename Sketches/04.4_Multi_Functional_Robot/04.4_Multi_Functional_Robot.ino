@@ -103,13 +103,14 @@ void loop() {
 
 void setup1() {
   delay(2000);
-  playmusic(2, 4);
+  playmusic(2, 1);
   pinMode(6, OUTPUT);
   digitalWrite(6, LOW);
 }
 void loop1() {
   if (music_flag > 0) {
     playmusic(1, music_flag);
+    music_flag = 0;
   } else {
     digitalWrite(6, LOW);
   }
@@ -240,19 +241,18 @@ void dance() {
 void playmusic(int playtimes, int song) {
   if (playtimes--) {
     if (song == 1) {
-      file = new AudioFileSourceLittleFS("1.mp3");
+      file = new AudioFileSourceLittleFS("Hello.mp3");
     } else if (song == 2) {
-      file = new AudioFileSourceLittleFS("2.mp3");
+      file = new AudioFileSourceLittleFS("Nicetomeetyou.mp3");
     } else if (song == 0) {
       file = new AudioFileSourceLittleFS("split.mp3");
     } else if (song == 3) {
-      file = new AudioFileSourceLittleFS("say-goodbye2.mp3");
+      file = new AudioFileSourceLittleFS("goodbye.mp3");
     } else if (song == 4) {
-      file = new AudioFileSourceLittleFS("Hello.mp3");
+      file = new AudioFileSourceLittleFS("hello_cn.mp3");
     }
-    // file = new AudioFileSourceLittleFS("Hello.mp3");
     out = new AudioOutputI2SNoDAC(6, 26);
-    out->SetGain(4.0);  //Volume Setup
+    out->SetGain(3.5);  //Volume Setup
     mp3 = new AudioGeneratorMP3();
     mp3->begin(file, out);
     if (mp3->isRunning() && song > 0) {
@@ -267,7 +267,6 @@ void playmusic(int playtimes, int song) {
       delete mp3;
       out->flush();
       out->stop();
-      Serial.printf("play music..\n");
       pinMode(6, OUTPUT);
       digitalWrite(6, LOW);
     }

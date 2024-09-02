@@ -173,7 +173,7 @@ void Bipedal_Robot::home() {
 
     detachServos();
     isBipedalRobotResting = true;
-    Serial.print("home-home");
+	Serial.print("home-home");
   }
 }
 
@@ -213,10 +213,17 @@ void Bipedal_Robot::walk(float steps, int T, int dir) {
   //--      -90 : Walk forward
   //--       90 : Walk backward
   //-- Feet servos also have the same offset (for tiptoe a little bit)
-  // int A[4] = { 45, 45, 40, 40 };
-  int A[4] = { 30, 30, 20, 20 };
+  int A[4] = { 40, 40, 60, 60 };
   int O[4] = { 0, 0, 0, 0 };
   double phase_diff[4] = { 0, 0, DEG2RAD(dir * -90), DEG2RAD(dir * -90) };
+
+  if(dir == FORWARD){
+    O[2] = 15;        //-- Left foot servo
+    O[3] = -17;       //-- Right foot servo
+  } else {
+    O[2] = 25;
+    O[3] = -13;
+  }
 
   //-- Let's oscillate the servos!
   _execute(A, O, T, phase_diff, steps);
@@ -234,10 +241,8 @@ void Bipedal_Robot::turn(float steps, int T, int dir) {
   //-- When the right hip servo amplitude is higher, the steps taken by
   //--   the right leg are bigger than the left. So, the robot describes an
   //--   left arc
-  // int A[4] = { 30, 30, 20, 20 };
-  int A[4] = { 35, 35, 20, 20 };
-  // int O[4] = { 0, 0, 4, -4 };
-  int O[4] = { 0, 0, 0, 0 };
+  int A[4] = { 30, 30, 20, 20 };
+  int O[4] = { 0, 0, 4, -4 };
   double phase_diff[4] = { 0, 0, DEG2RAD(-90), DEG2RAD(-90) };
 
   if (dir == LEFT) {
@@ -364,7 +369,7 @@ void Bipedal_Robot::swing(float steps, int T, int h) {
 
   //-- Both feets are in phase. The offset is half the amplitude
   //-- It causes the robot to swing from side to side
-  int A[4] = { 5, 5, h, h };// int A[4] = { 0, 0, h, h };
+  int A[4] = { 5, 5, h, h };
   int O[4] = { 0, 0, h / 2, -h / 2 };
   double phase_diff[4] = { 0, 0, DEG2RAD(0), DEG2RAD(0) };
 
@@ -447,7 +452,7 @@ void Bipedal_Robot::moonwalker(float steps, int T, int h, int dir) {
   //--  Both amplitudes are equal. The offset is half the amplitud plus a little bit of
   //-   offset so that the robot tiptoe lightly
 
-  int A[4] = { 5, 5, h, h };//int A[4] = { 0, 0, h, h };
+  int A[4] = { 5, 5, h, h };
   int O[4] = { 0, 0, h / 2 + 2, -h / 2 - 2 };
   int phi = -dir * 90;
   double phase_diff[4] = { 0, 0, DEG2RAD(phi), DEG2RAD(-60 * dir + phi) };

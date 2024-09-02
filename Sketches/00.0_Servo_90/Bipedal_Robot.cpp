@@ -212,9 +212,17 @@ void Bipedal_Robot::walk(float steps, int T, int dir) {
   //--      -90 : Walk forward
   //--       90 : Walk backward
   //-- Feet servos also have the same offset (for tiptoe a little bit)
-  int A[4] = { 45, 45, 40, 40 };
+  int A[4] = { 40, 40, 60, 60 };
   int O[4] = { 0, 0, 0, 0 };
   double phase_diff[4] = { 0, 0, DEG2RAD(dir * -90), DEG2RAD(dir * -90) };
+
+  if(dir == FORWARD){
+    O[2] = 15;        //-- Left foot servo
+    O[3] = -17;       //-- Right foot servo
+  } else {
+    O[2] = 25;
+    O[3] = -13;
+  }
 
   //-- Let's oscillate the servos!
   _execute(A, O, T, phase_diff, steps);

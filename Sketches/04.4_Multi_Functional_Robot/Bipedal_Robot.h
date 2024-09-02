@@ -21,7 +21,6 @@
 class Bipedal_Robot {
 public:
 
-  bool isBipedalRobotResting;
   //-- Bipedal_Robot initialization
   void init(int YL, int YR, int RL, int RR, bool load_calibration);
   void Buzzer_init(int Buzzer);
@@ -81,7 +80,7 @@ private:
   unsigned long final_time;
   unsigned long partial_time;
   float increment[4];
-  
+  bool isBipedalRobotResting;
   void _execute(int A[4], int O[4], int T, double phase_diff[4], float steps);
 };
 

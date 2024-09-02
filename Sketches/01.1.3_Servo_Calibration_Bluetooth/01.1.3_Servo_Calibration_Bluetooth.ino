@@ -132,7 +132,7 @@ void readservo(int parameter1, int parameter2, int parameter3, int parameter4) {
 
 void loop() {
   if (BTserial.available()) {
-    inputStringBLE = BTserial.readStringUntil('\r\n');
+    inputStringBLE = BTserial.readStringUntil('\n');
     stringComplete = true;
   }
   if (stringComplete) {  //Get the Bluetooth command

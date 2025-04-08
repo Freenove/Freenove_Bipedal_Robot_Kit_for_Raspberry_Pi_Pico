@@ -33,6 +33,7 @@ This product provides the following online documents.
    :maxdepth: 1
    :caption: FNK0033
 
+   fnk0033/codes/tutorial/Welcome.rst
    fnk0033/codes/tutorial/List.rst
    fnk0033/codes/tutorial/Preface.rst
    fnk0033/codes/tutorial/Installation_of_Arduino_IDE.rst

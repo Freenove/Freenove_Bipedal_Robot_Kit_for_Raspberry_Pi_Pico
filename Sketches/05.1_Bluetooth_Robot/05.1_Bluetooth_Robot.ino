@@ -23,7 +23,8 @@ void receiveStop() {
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
+  delay(2000);
   // Loop through each baud rate and send commands 
   for(int i = 0; i < baudRateCount; i++){
     BTserial.begin(baudRate[i]);
@@ -32,23 +33,22 @@ void setup() {
     delay(200);
     BTserial.println("AT+ROLE=0");
     delay(200);
-    BTserial.println("AT+UART=4");//1=2400 2=9600 3=19200 4=115200
+    BTserial.println("AT+UART=2");//1=2400 2=9600 3=19200 4=115200
     delay(200);
 
     //SoftwareSerial does not support dynamic adjustment of baud rate, so close the serial
     BTserial.end();
   }
   
-  BTserial.begin(115200);
+  BTserial.begin(9600);
   delay(2000);
 
   SCmd.addDefaultHandler(receiveStop);
   inputString.reserve(200);
   Serial.println("Set the name of the Bluetooth module to BT05.");
-  Serial.println("Set the Bluetooth baud rate to 115200.");
+  Serial.println("Set the Bluetooth baud rate to 9600.");
   // Serial.println("Set Bluetooth to slave mode.");
 }
-
 
 void loop() {
   while (BTserial.available()) {

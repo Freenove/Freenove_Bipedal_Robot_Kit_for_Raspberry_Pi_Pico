@@ -30,6 +30,7 @@ void loop() {
   if (mp3->isRunning()) {
     if (!mp3->loop()) {
       mp3->stop();
+      Serial.printf("Hello done\n");
       delete file;
       delete mp3;
       mp3 = new AudioGeneratorMP3();

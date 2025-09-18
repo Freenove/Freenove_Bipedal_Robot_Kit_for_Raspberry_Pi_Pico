@@ -1,10 +1,10 @@
 ##############################################################################
-Module test 
+Chapter 1 Module test
 ##############################################################################
 
 If you have any concerns, please feel free to contact us via support@freenove.com
 
-Servo
+1.1 Servo
 *********************************
 
 Servo
@@ -20,6 +20,7 @@ We will use a 50Hz PWM signal with a duty cycle in a certain range to drive the 
 .. list-table::
     :align: center
     :header-rows: 1
+    :class: zebra
 
     * - High level time
       - Servo angle
@@ -155,10 +156,10 @@ Calibrate the servo angles via Bluetooth wireless connection.
 .. image:: ../_static/imgs/1_Module_test/Module05.png
     :align: center
 
-Sketch
+1.1.1_Servo_Calibration
 ============================
 
-Servo_Calibration
+Sketch
 ----------------------------
 
 Upload the sketch to Raspberry Pi Pico (W). This sketch is for servo calibration. You can adjust the robot's status via keyboard input, until the robot can stand up normally. After calibration, you can send the character t for the robot to move forward. Pay attention to the robot’s movement, if it does not walk well, you can adjust each servo again until the robot’s movement is normal. After the calibration finishes, you need to modify the code according to the calibration data and upload the sketch again. Refer to the sketch for more details.
@@ -330,7 +331,7 @@ In tha main loop, the robot moves forward and backword, turn left, and turn righ
     :lines: 45-57
     :dedent:
 
-Buzzer
+1.2 Buzzer
 *****************************************
 
 Buzzer
@@ -402,7 +403,7 @@ Control the buzzer to sound regularly. Parameter beat represents the number of t
 
     void Buzzer_Alert(int beat, int rebeat);//Buzzer alarm function
 
-Loudspeaker
+1.3 Loudspeaker
 *******************************************************
 
 Loudspeaker
@@ -413,56 +414,18 @@ Besides the buzzer, we still have a loud speker as sound device, which is direct
 In this project, we use the speaker to play a piect of music. If you just use the speker to make simple sounds, you can refer to the example of the buzzer and modify the pins accordingly.
 
 Schematic
--------------------------------------------------------
+=======================================================
 
 As can be seen, the robot plays audio via GPIO6 of Raspberry Pi Pico (W).
 
 .. image:: ../_static/imgs/1_Module_test/Module15.png
     :align: center
-   
-Add libraries
-========================================================
 
-Method 1
-------------------------------------------------------
-
-Open Arduino IDE, click Sketch on Menu bar -> Include Library -> Manage Libraries.
-
-.. image:: ../_static/imgs/1_Module_test/Module16.png
-    :align: center
-
-Or click the shortcut icon on the left.
-
-.. image:: ../_static/imgs/1_Module_test/Module17.png
-    :align: center
-
-There is an input field on the right top of the pop-up window. Enter ESP8266Audio there and click to install the library boxed in the following figure. 
-
-.. image:: ../_static/imgs/1_Module_test/Module18.png
-    :align: center
-
-Wait for the installation to finish.
-
-Method 2
-------------------------------------------------------
-
-Open Arduino IDE, click Sketch on Menu bar->Include Library ->Add .ZIP library.
-
-.. image:: ../_static/imgs/1_Module_test/Module19.png
-    :align: center
-
-On the pop-up window, select ESP8266Audio.zip in Libraries folder under 
-
-“ **Freenove_Bipedal_Robot_Kit_for_Raspberry_Pi_Pico\\Libraries** ”, and then click Open.
-
-.. image:: ../_static/imgs/1_Module_test/Module20.png
-    :align: center
+1.3.1_Loudspeaker
+=======================================================
 
 Sketch
 =============================================
-
-Loudspeaker
---------------------------------------------
 
 In this section, we use GPIO6 of the Raspberry Pi Pico (W). This example is the same as the buzzer example, so the result is the same.
 
@@ -472,7 +435,7 @@ Open “01.3.1_Loudspeaker” folder in “ **Freenove_Bipedal_Robot_Kit_for_Ras
     :align: center
 
 Code
-''''''''''''''''''''''''''''''''''''''''''''
+--------------------------------------------
 
 .. literalinclude:: ../../../freenove_Kit/Sketches/01.3.1_Loudspeaker/01.3.1_Loudspeaker.ino
     :linenos:
@@ -480,7 +443,7 @@ Code
     :dedent:
 
 Code Explanation
-''''''''''''''''''''''''''''''''''''''''''''
+--------------------------------------------
 
 This code is the same as the buzzer code, except for the different GPIO used. In the buzzer example, we use GPIO 2 and in this one, we use GPIO 6.
 
@@ -489,68 +452,105 @@ This code is the same as the buzzer code, except for the different GPIO used. In
 
     #define PIN_BUZZER 6
 
-Music
---------------------------------------------
+1.3.2_Music
+=======================================================
 
-In this section, we will use GPIO6t of the Raspberry Pi Pico to play audio. After the code upload successfully, it will play a piece of music.
+In this section, we will use GPIO6 of the Raspberry Pi Pico to play audio. After the code upload successfully, it will play a piece of music. Please note that to play the music, it requires the use of file system. The raspberry pi Pico (W) has built-in 264KB SRAM and 2MB of onboard flash, and the Arduino-Pico core supports using some of the onboard flash as a file system, useful for storing configuration data, output strings, logging, and more. It also supports using SD cards as another (FAT32) file system, with an API that’s compatible with the onboard flash file system.
 
-Open “01.3.2_Music” folder in “ **Freenove_Bipedal_Robot_Kit_for_Raspberry_Pi_Pico\\Sketches** ” and then double-click “01.3.2_Music.ino”.
+The following diagram shows the flash layout used in Arduino-Pico:
+
+.. image:: ../_static/imgs/1_Module_test/Module71.png
+    :align: center
+
+The storage of the raspberry pi Pico (W) file system can be configured via the Arduino IDE menu bar, ranging from 0KB to 1MB.
+
+.. image:: ../_static/imgs/1_Module_test/Module72.png
+    :align: center
+
+Due to the limitation of the storage, the file uploaded to Pico (W) should not exceed 1024Kb (1M). Therefore, we need to restrict the file scale; otherwise, it may fail to upload.
+
+Upload the file to LittleFS file system.
+
+LittleFS is an onboard file system that sets aside some program flash memory for use as a file system, without requiring any external hardware.
+
+Open “01.3.2_Music” folder in **“Freenove_Bipedal_Robot_Kit_for_Raspberry_Pi_Pico\\Sketches”** and then double-click “01.3.2_Music.ino”.
+
+.. image:: ../_static/imgs/1_Module_test/Module73.png
+    :align: center
+
+Install ESP8266Audio library
+=======================================================
+
+In this project, we use a third-party library named ESP8266Audio. Please install it first.
+
+Open Arduino IDE, click Library Manage on the left, and search “ESP8266Audio” to install.
+
+It is recommended to use version 1.9.7 of the ESP8266Audio library to avoid compatibility issues
+
+.. image:: ../_static/imgs/1_Module_test/Module74.png
+    :align: center
+
+The second way, open Arduino IDE, click Sketch -> Include Library -> Add .ZIP Library. In the pop-up window, find the file named “./Libraries/ESP8266Audio-V1.9.7.Zip” which locates in this directory, and click OPEN.
+
+.. image:: ../_static/imgs/1_Module_test/Module75.png
+    :align: center
+
+.. image:: ../_static/imgs/1_Module_test/Module76.png
+    :align: center
 
 Install the PicoLittleFS tool
-''''''''''''''''''''''''''''''''''''''''''''
+=======================================================
 
 The latest Arduino IDE has supported LittleFS plugins.
 
 The steps to install PicoLittleFS is as follows:
 
-**Copy** the **file arduino-littlefs-upload-1.0.0.vsix** under the directory “ **Freenove_Bipedal_Robot_Kit_for_Raspberry_Pi_Pico\\Tools** ” to the computer's directory **~/.arduinoIDE/plugins/**
+**Copy** the file **arduino-littlefs-upload-1.5.4.vsix** under the directory **“Freenove_Bipedal_Robot_Kit_for_Raspberry_Pi_Pico\\Tools”** to the computer's directory **~/.arduinoIDE/plugins/**
 
 If there is no a folder name plugins in your computer, please create the folder before copying the file.
 
 After copying the file, restart Arduino IDE.
 
-.. image:: ../_static/imgs/1_Module_test/Module22.png
+.. image:: ../_static/imgs/1_Module_test/Module77.png
     :align: center
 
-.. image:: ../_static/imgs/1_Module_test/Module23.png
+.. image:: ../_static/imgs/1_Module_test/Module78.png
     :align: center
 
 The sketch opened with the start of the Arduino IDE may be corrupted, which can lead to code uploading failure. To address this issue, you can change the board selection (switching to any board), and then select back the pico board. Alternatively, you can close the opened sketch and reopen it.
 
-.. image:: ../_static/imgs/1_Module_test/Module24.png
+.. image:: ../_static/imgs/1_Module_test/Module79.png
     :align: center
 
-Here is how to use the PicoLittleFS tool, press [Ctrl]+[Shift]+[P] simultaneously, enter **Upload LittleFS to Pico/ESP8266** on the input field. 
+Here is how to use the PicoLittleFS tool, press [Ctrl]+[Shift]+[P] simultaneously, enter **Upload LittleFS to Pico/ESP8266** on the input field.
 
-.. image:: ../_static/imgs/1_Module_test/Module25.png
+.. image:: ../_static/imgs/1_Module_test/Module80.png
     :align: center
 
 If your Arduino IDE is an old version one, like Arduino 1.x.x, please refer to the following steps to install the PicoLittelFS tool.
 
 First, open the Arduino IDE, and then click File in Menus and select Preferences.
 
-.. image:: ../_static/imgs/1_Module_test/Module26.png
+.. image:: ../_static/imgs/1_Module_test/Module81.png
     :align: center
 
 Find the Arduino IDE environment directory location.
 
-.. image:: ../_static/imgs/1_Module_test/Module27.png
+.. image:: ../_static/imgs/1_Module_test/Module82.png
     :align: center
 
-Copy the tools folder in the code folder to your Sketchbook location. 
+Copy the tools folder in the code folder to your Sketchbook location.
 
-.. image:: ../_static/imgs/1_Module_test/Module28.png
+.. image:: ../_static/imgs/1_Module_test/Module83.png
     :align: center
 
 Finally, restart the Arduino IED. After restarting, you can see that the plug-in already exists in the interface.
 
-.. image:: ../_static/imgs/1_Module_test/Module29.png
+.. image:: ../_static/imgs/1_Module_test/Module84.png
     :align: center
 
-.. _upload_music:
-
 Upload music
-''''''''''''''''''''''''''''''''''''''''''''
+=======================================================
 
 Pico of Raspberry Pie has 2M Flash space. Generally, Arduino mode allocates it to the code area. Therefore, before starting, we need to modify the configuration of Flash Size.
 
@@ -603,7 +603,7 @@ After the music uploads successfully, click the upload button to upload the sket
 The effect of this example is that the speaker plays a piece of audio once. After the code finishes uploading, the speaker will play the audio file you uploaded.
 
 Code
-''''''''''''''''''''''''''''''''''''''''''''
+--------------------------------------------
 
 .. literalinclude:: ../../../freenove_Kit/Sketches/01.3.2_Music/01.3.2_Music.ino
     :linenos:
@@ -611,7 +611,7 @@ Code
     :dedent:
 
 Code Explanation
-''''''''''''''''''''''''''''''''''''''''''''
+--------------------------------------------
 
 Set the audio file to be played.
 	
@@ -647,7 +647,7 @@ Check whether the audio has finished playing. If so, clear the audio file.
       mp3 = new AudioGeneratorMP3();
     }
 
-ADC Module
+1.4 ADC Module
 ******************************************************
 
 ADC
@@ -748,7 +748,7 @@ Click “Upload” to upload the code to Pico (W). After uploading successfully,
 .. image:: ../_static/imgs/1_Module_test/Module43.png
     :align: center
 
-LED Matrix
+1.5 LED Matrix
 ******************************************************
 
 LED Matrix
@@ -781,8 +781,8 @@ The LED matrix is common anode. As we can see from the schematic above, the anod
     * - Front of LED Matrix
       - Back of LED Matrix
 
-    * - Front of LED Matrix
-      - Back of LED Matrix
+    * - |Module47|
+      - |Module48|
 
 .. |Module47| image:: ../_static/imgs/1_Module_test/Module47.png
 .. |Module48| image:: ../_static/imgs/1_Module_test/Module48.png
@@ -794,45 +794,55 @@ We divide the LED matrix into two sides and display “+” on the left and “o
 
 Below, the table on the left corresponds to the "+" above, and the table on the right corresponds to the "o" above.
 
-+-----+-----------+-------------+
-| Row |  Binary   | Hexadecimal |
-+=====+===========+=============+
-| 1   | 0000 0000 | 0x00        |
-+-----+-----------+-------------+
-| 2   | 0001 1000 | 0x18        |
-+-----+-----------+-------------+
-| 3   | 0001 1000 | 0x18        |
-+-----+-----------+-------------+
-| 4   | 0111 1110 | 0x7e        |
-+-----+-----------+-------------+
-| 5   | 0111 1110 | 0x7e        |
-+-----+-----------+-------------+
-| 6   | 0001 1000 | 0x18        |
-+-----+-----------+-------------+
-| 7   | 0001 1000 | 0x18        |
-+-----+-----------+-------------+
-| 8   | 0000 0000 | 0x00        |
-+-----+-----------+-------------+
+.. table::
+    :align: center
+    :width: 80%
+    :class: table-line
 
-+-----+-----------+-------------+
-| Row |  Binary   | Hexadecimal |
-+=====+===========+=============+
-| 1   | 0000 0000 | 0x00        |
-+-----+-----------+-------------+
-| 2   | 0001 1000 | 0x18        |
-+-----+-----------+-------------+
-| 3   | 0010 0100 | 0x24        |
-+-----+-----------+-------------+
-| 4   | 0100 0010 | 0x42        |
-+-----+-----------+-------------+
-| 5   | 0100 0010 | 0x42        |
-+-----+-----------+-------------+
-| 6   | 0010 0100 | 0x24        |
-+-----+-----------+-------------+
-| 7   | 0001 1000 | 0x18        |
-+-----+-----------+-------------+
-| 8   | 0000 0000 | 0x00        |
-+-----+-----------+-------------+
+    +-----+-----------+-------------+
+    | Row |  Binary   | Hexadecimal |
+    +=====+===========+=============+
+    | 1   | 0000 0000 | 0x00        |
+    +-----+-----------+-------------+
+    | 2   | 0001 1000 | 0x18        |
+    +-----+-----------+-------------+
+    | 3   | 0001 1000 | 0x18        |
+    +-----+-----------+-------------+
+    | 4   | 0111 1110 | 0x7e        |
+    +-----+-----------+-------------+
+    | 5   | 0111 1110 | 0x7e        |
+    +-----+-----------+-------------+
+    | 6   | 0001 1000 | 0x18        |
+    +-----+-----------+-------------+
+    | 7   | 0001 1000 | 0x18        |
+    +-----+-----------+-------------+
+    | 8   | 0000 0000 | 0x00        |
+    +-----+-----------+-------------+
+
+.. table::
+    :align: center
+    :width: 80%
+    :class: table-line
+
+    +-----+-----------+-------------+
+    | Row |  Binary   | Hexadecimal |
+    +=====+===========+=============+
+    | 1   | 0000 0000 | 0x00        |
+    +-----+-----------+-------------+
+    | 2   | 0001 1000 | 0x18        |
+    +-----+-----------+-------------+
+    | 3   | 0010 0100 | 0x24        |
+    +-----+-----------+-------------+
+    | 4   | 0100 0010 | 0x42        |
+    +-----+-----------+-------------+
+    | 5   | 0100 0010 | 0x42        |
+    +-----+-----------+-------------+
+    | 6   | 0010 0100 | 0x24        |
+    +-----+-----------+-------------+
+    | 7   | 0001 1000 | 0x18        |
+    +-----+-----------+-------------+
+    | 8   | 0000 0000 | 0x00        |
+    +-----+-----------+-------------+
 
 Sketch
 ====================================================
@@ -842,16 +852,23 @@ The LED matrix is controlled by HT16K33 chip. Therefore, before opening the prog
 Install Freenove_VK16K33_Lib Library
 ---------------------------------------------------
 
-Click Sketch and select Add .ZIP Library in Include. 
+In this project, we use a third-party library named **Freenove_VK16K33_Lib** and **Adafruit-GFX-Library**. Please install it first.
 
-.. image:: ../_static/imgs/1_Module_test/Module50.png
+Open Arduino IDE, click **Library Manage** on the left, and search **“Freenove_VK16K33_Lib”** and **“Adafruit-GFX-Library”** to install.
+
+It is recommended to use version **1.0.0** of the Freenove_VK16K33_Lib library to avoid compatibility issues.
+
+.. image:: ../_static/imgs/1_Module_test/Module85.png
     :align: center
 
-Select “Freenove_VK16K33_Lib.zip” in the folder Libraries of the folder.
+It is recommended to use version 1.12.1 of the Adafruit-GFX-Library to avoid compatibility issues. 
 
-“Freenove_Bipedal_Robot_Kit_for_Raspberry_Pi_Pico”.
+.. image:: ../_static/imgs/1_Module_test/Module86.png
+    :align: center
 
-.. image:: ../_static/imgs/1_Module_test/Module51.png
+The second way, open Arduino IDE, click Sketch -> Include Library -> Add .ZIP Library. In the pop-up window, find the file named **“./Libraries/Freenove_VK16K33_Lib-V1.0.0.Zip”** and **“./Libraries/ Adafruit-GFX-Library-V1.12.1.Zip”** which locates in this directory, and click OPEN.
+
+.. image:: ../_static/imgs/1_Module_test/Module87.png
     :align: center
 
 Install Processing
@@ -984,7 +1001,7 @@ Define count to calculate the number of one-dimensional arrays contained in the 
     :lines: 39-44
     :dedent:
 
-LED
+1.6 LED
 ****************************************************
 
 LED
@@ -1008,28 +1025,34 @@ As shown below, the DOUT of each LED is connected with DIN of the next LED, and 
 .. image:: ../_static/imgs/1_Module_test/Module67.png
     :align: center
 
+Install Adafruit_NeoPixel library
+====================================================
+
+In this project, we use a third-party library named **Adafruit_NeoPixel**. Please install it first.
+
+Open Arduino IDE, click **Library Manage** on the left, and search **“Adafruit_NeoPixel”** to install.
+
+It is recommended to use version **1.12.5** of the Adafruit_NeoPixel library to avoid compatibility issues.
+
+.. image:: ../_static/imgs/1_Module_test/Module88.png
+    :align: center
+
+The second way, open Arduino IDE, click Sketch -> Include Library -> Add .ZIP Library. In the pop-up window, find the file named “./Libraries/ Adafruit_NeoPixel-V1.12.5.Zip” which locates in this directory, and click OPEN.
+
+.. image:: ../_static/imgs/1_Module_test/Module89.png
+    :align: center
+
+.. image:: ../_static/imgs/1_Module_test/Module90.png
+    :align: center
+
 Sketch
 ====================================================
 
-Before programming, please make sure the LED driver library has been installed. If not, please install it as follows.
+We will download the code to Raspberry Pi Pico W to test the LED.
 
-Open Arduino IDE, select Sketch on Menu bar, navigate the mouse to Include library and click Manage Libraries.
+Open the folder “01.6_WS2812” in the **“Freenove_Bipedal_Robot_Kit_for_Raspberry_Pi_Pico\\Sketches”** and then double click “01.6_WS2812.ino”.
 
-.. image:: ../_static/imgs/1_Module_test/Module68.png
-    :align: center
-
-Enter "Adafruit_NeoPixel" in the input field of the pop-up window, find it and then click Install.
-
-.. image:: ../_static/imgs/1_Module_test/Module69.png
-    :align: center
-
-Wait for the installation to finish.
-
-Next, we will download the code to Raspberry Pi Pico W to test the LED. 
-
-Open the folder “01.6_WS2812” in the “ **Freenove_Bipedal_Robot_Kit_for_Raspberry_Pi_Pico\\Sketches** ” and then double click “01.6_WS2812.ino”.
-
-.. image:: ../_static/imgs/1_Module_test/Module70.png
+.. image:: ../_static/imgs/1_Module_test/Module91.png
     :align: center
 
 Code

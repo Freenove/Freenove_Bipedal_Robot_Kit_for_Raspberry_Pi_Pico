@@ -1,5 +1,5 @@
 ##############################################################################
-Infrared Robot
+Chapter 4 Infrared Robot
 ##############################################################################
 
 Introduction of infrared reception function
@@ -28,7 +28,22 @@ The following is the key value that the receiving circuit will receive when each
 .. image:: ../_static/imgs/4_Infrared_Robot/Infrared02.png
     :align: center
 
-This sketch uses the infrared receiving tube to receive the value sent form the infrared remote control, and print it out via the serial port.
+Install IRremote library
+==================================
+
+In this project, we use a third-party library named **IRremote**. Please install it first.
+
+Open Arduino IDE, click **Library Manage** on the left, and search **“IRremote”** to install.
+
+It is recommended to use version **4.4.1** of the IRremote library to avoid compatibility issues.
+
+.. image:: ../_static/imgs/4_Infrared_Robot/Infrared15.png
+    :align: center
+
+The second way, open Arduino IDE, click Sketch -> Include Library -> Add .ZIP Library. In the pop-up window, find the file named **“./Libraries/ IRremote_V4.4.1_20241029.Zip”** which locates in this directory, and click OPEN.
+
+.. image:: ../_static/imgs/4_Infrared_Robot/Infrared16.png
+    :align: center
 
 Sketch
 ==================================
@@ -40,6 +55,9 @@ Open the folder “04.1_IR_Receiver”in
 “ **Freenove_Robot_Kit_for_Raspberry_Pi_Pico\\Ordinary_wheels\\Sketches** ” and double click 
 
 “04.1_IR_Receiver.ino”.
+
+.. image:: ../_static/imgs/4_Infrared_Robot/Infrared17.png
+    :align: center
 
 Code
 --------------------------------
@@ -81,7 +99,7 @@ Please note that **IrReceiver.resume()** must be applied to release the infrared
     :lines: 19-23
     :dedent:
 
-Infrared Robot
+4.2 Infrared Robot
 *********************************
 
 On the basis of the previous section, we further controls the robot via the infrared remote controller. Press the black buttons on the remote, the robot will move forward, move backward, turn left and turn right accordingly. Press other buttons will stop the robot.
@@ -211,47 +229,47 @@ Infrared key code value processing function receives instructions sent by the in
 
     void handleControl(unsigned long value) {
     // Handle the commands
-    switch (value) {
-        case 0xBF40FF00:  // Receive the number '+'
-        ...
-        case 0xE619FF00:  // Receive the number '-'
-        ...
-        case 0xF807FF00:  // Receive the number '|<<'
-        ...
-        case 0xF609FF00:  // Receive the number '>>|'
-        ...
-        case 0xEA15FF00:  // Receive the number '▶'
-        ...
-        case 0xE916FF00:  // Receive the number '0'
-        ...
-        case 0xF30CFF00:  // Receive the number '1'
-        ...
-        case 0xF708FF00:  // Receive the number '4'
-        ...
-        case 0xF20DFF00:  // Receive the number 'C'
-        ...
-        case 0xA15EFF00:  // Receive the number '3'
-        ...
-        case 0xA55AFF00:  // Receive the number '6'
-        ...
-        case 0xB54AFF00:  // Receive the number '9'
-        ...
-        case 0xBB44FF00:  // Receive the number 'TEST'
-        ...
-        case 0xE718FF00:  // Receive the number '2'
-        ...
-        case 0xE31CFF00:  // Receive the number '5'
-        ...
-        case 0xBD42FF00:  // Receive the number '7'
-        ...
-        case 0xAD52FF00:  // Receive the number '8'
-        ...
-        case 0xFFFFFFFF:  // Remain unchanged
-        break;
-        default:
-        break;
+        switch (value) {
+            case 0xBF40FF00:  // Receive the number '+'
+            ...
+            case 0xE619FF00:  // Receive the number '-'
+            ...
+            case 0xF807FF00:  // Receive the number '|<<'
+            ...
+            case 0xF609FF00:  // Receive the number '>>|'
+            ...
+            case 0xEA15FF00:  // Receive the number '▶'
+            ...
+            case 0xE916FF00:  // Receive the number '0'
+            ...
+            case 0xF30CFF00:  // Receive the number '1'
+            ...
+            case 0xF708FF00:  // Receive the number '4'
+            ...
+            case 0xF20DFF00:  // Receive the number 'C'
+            ...
+            case 0xA15EFF00:  // Receive the number '3'
+            ...
+            case 0xA55AFF00:  // Receive the number '6'
+            ...
+            case 0xB54AFF00:  // Receive the number '9'
+            ...
+            case 0xBB44FF00:  // Receive the number 'TEST'
+            ...
+            case 0xE718FF00:  // Receive the number '2'
+            ...
+            case 0xE31CFF00:  // Receive the number '5'
+            ...
+            case 0xBD42FF00:  // Receive the number '7'
+            ...
+            case 0xAD52FF00:  // Receive the number '8'
+            ...
+            case 0xFFFFFFFF:  // Remain unchanged
+            break;
+            default:
+            break;
+        }
     }
-}
 
 Sketch 04.4_Multi_Functional_Robot.ino is almost the same as 04.3_Multi_Functional_Robot.ino, except that it is added with the music play function. You can find the function of each key in the table below.
 

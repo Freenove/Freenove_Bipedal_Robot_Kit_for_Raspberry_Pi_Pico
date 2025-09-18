@@ -1,5 +1,5 @@
 ##############################################################################
-Sing and Dance
+Chapter 3 Sing and Dance
 ##############################################################################
 
 Playing Music
@@ -98,7 +98,7 @@ The sketch is the same as 01.3.2_Music.ino. Now, let's upload the code to Pico (
 Code
 -----------------------------------
 
-.. literalinclude:: ../../../freenove_Kit/Sketches/03.1_Music/03.1_Music.ino
+.. literalinclude:: ../../../freenove_Kit/Sketches/03.1_Sing_and_dance/03.1_Sing_and_dance.ino
     :linenos:
     :language: cpp
     :dedent:
@@ -113,7 +113,7 @@ Sketch
 
 Upload the code and you will get a robot that is singing while dancing.
 
-Open the folder “03.2_Photosensitive_Car” in 
+Open the folder “03.1_Photosensitive_Car” in 
 
 “ **Freenove_Bipedal_Robot_Kit_for_Raspberry_Pi_Pico\\Sketches** ” and double click 
 
@@ -122,7 +122,7 @@ Open the folder “03.2_Photosensitive_Car” in
 Code
 ----------------------------------
 
-.. literalinclude:: ../../../freenove_Kit/Sketches/03.2_Sing_and_dance/03.2_Sing_and_dance.ino
+.. literalinclude:: ../../../freenove_Kit/Sketches/03.1_Sing_and_dance/03.1_Sing_and_dance.ino
     :linenos:
     :language: cpp
     :dedent:
@@ -132,7 +132,7 @@ Code Explanation
 
 The Raspberry Pi pico (W) is equipped with a dual-core ARM Cortex M0+ processor. Core 0 is used to run the robot's dancing movements, and core 1 is for music playback. The two cores are independent and do not affect each other when running code.
 
-.. literalinclude:: ../../../freenove_Kit/Sketches/03.2_Sing_and_dance/03.2_Sing_and_dance.ino
+.. literalinclude:: ../../../freenove_Kit/Sketches/03.1_Sing_and_dance/03.1_Sing_and_dance.ino
     :linenos:
     :language: cpp
     :lines: 110-112, 119-121

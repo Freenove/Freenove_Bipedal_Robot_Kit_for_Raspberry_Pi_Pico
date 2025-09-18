@@ -1,5 +1,5 @@
 ##############################################################################
-Bluetooth remote control robot
+Chapter 5 Bluetooth remote control robot
 ##############################################################################
 
 **This section requires an Android or iPhone device with Bluetooth to control the robot.** 

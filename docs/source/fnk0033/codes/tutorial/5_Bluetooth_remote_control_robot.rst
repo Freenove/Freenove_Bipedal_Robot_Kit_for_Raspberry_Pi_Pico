@@ -233,7 +233,10 @@ Open the folder “05.2_Bluetooth_Remote_Robot” in
 
 **Freenove_Bipedal_Robot_Kit_for_Raspberry_Pi_Pico\\Sketches and double click** “05.2_Bluetooth_Remote_Robot.ino”.
 
-As mentioned above, connect the APP to the ribot via Bluetooth, and then control the robot by taping or sliding the opration panel on the APP.
+.. image:: ../_static/imgs/5_Bluetooth_remote_control_robot/Bluetooth18.png
+    :align: center
+
+Connect the App to the Bluetooth of the robot, and tap the directional keys to control its movements.
 
 .. image:: ../_static/imgs/5_Bluetooth_remote_control_robot/Bluetooth15.png
     :align: center

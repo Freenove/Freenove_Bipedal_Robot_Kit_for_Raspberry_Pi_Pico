@@ -44,3 +44,4 @@ This product provides the following online documents.
    fnk0033/codes/tutorial/4_Infrared_Robot.rst
    fnk0033/codes/tutorial/5_Bluetooth_remote_control_robot.rst
    fnk0033/codes/tutorial/What_s_next.rst
+   fnk0033/codes/tutorial/Product_Certification.rst

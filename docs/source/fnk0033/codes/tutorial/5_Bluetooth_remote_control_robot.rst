@@ -292,7 +292,7 @@ After the code is successfully uploaded, unplug the USB cable and plug the Bluet
 .. image:: ../_static/imgs/5_Bluetooth_remote_control_robot/Bluetooth17.png
     :align: center
 
-Connect the APP with the robot through Bluetooth. Tap or swipe the operation panels on the app to control the robot’s movements. The color palette of the lower right corner can be clicked to control the display mode and color of the LED. Among them,
+Connect the APP with the robot through Bluetooth. Tap or swipe the operation panels on the app to control the robot's movements. The color palette of the lower right corner can be clicked to control the display mode and color of the LED. Among them,
 
 Mode 0 is a flowing rainbow,
 

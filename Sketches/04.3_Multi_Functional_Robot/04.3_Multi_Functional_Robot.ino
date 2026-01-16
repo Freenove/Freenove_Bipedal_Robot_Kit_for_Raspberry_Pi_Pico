@@ -27,7 +27,7 @@ int move_flag = 0;
 extern int move_flag;
 
 Bipedal_Robot Bipedal_Robot;
-int calibratePosition[4] = { -17, -10, -15, 12 };
+//int calibratePosition[4] = { -17, -10, -15, 12 };
 int emotion_flag = 0;
 int ws2812_flag = 0;
 

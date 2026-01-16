@@ -23,7 +23,7 @@
 int move_flag = 0;
 
 Bipedal_Robot Bipedal_Robot;
-int calibratePosition[4] = { -17, -10, -15, 12 };
+//int calibratePosition[4] = { -17, -10, -15, 12 };
 
 void calib_homePos() {
   int servoPos[4];

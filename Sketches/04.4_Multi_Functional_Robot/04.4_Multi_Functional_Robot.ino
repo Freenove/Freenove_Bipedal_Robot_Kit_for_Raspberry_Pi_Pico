@@ -44,7 +44,7 @@ int RL;
 int RR;
 
 Bipedal_Robot Bipedal_Robot;
-int calibratePosition[4] = { -16, -24, -7, -32 };
+//int calibratePosition[4] = { -16, -24, -7, -32 };
 int emotion_flag = 0;
 int ws2812_flag = 0;
 int music_flag = 0;
